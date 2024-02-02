@@ -1,0 +1,13 @@
+--- a/netx_tap/netx_tap.c	2024-02-01 11:55:35.098216520 +0100
++++ b/netx_tap/netx_tap.c	2024-02-01 11:56:52.663802467 +0100
+@@ -112,6 +112,10 @@
+   if (NULL != find_device( config->cifx_name))
+     return NULL;
+ 
++  /* NOTE: This is a temporary hack -> we need to wait until firmware update all necessary information  */
++  OS_Sleep(1000);
++  /* NOTE: This is a temporary hack -> we need to wait until firmware update all necessary information  */
++
+   /* try to find a channel providing an ethernet interface */
+   while (CIFX_NO_ERROR == (search_error = cifxeth_search_eth_channel( config->cifx_name, channel_no, &channel_no)))
+   {
