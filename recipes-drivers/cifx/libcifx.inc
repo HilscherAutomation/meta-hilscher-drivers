@@ -3,8 +3,9 @@ HOMEPAGE = "http://www.hilscher.com"
 LICENSE = "MIT & HilscherSLA"
 
 LIC_FILES_CHKSUM ?= "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601 \
-                     file://Toolkit/HilscherSLA.pdf;md5=1d3864f430ae2bf421d0d76e91a3dbb8"
-NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/HilscherSLA.pdf"
+                     file://Toolkit/LICENSE.md;md5=b887653049e6302650eed7ce602b351e"
+
+NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/LICENSE.md"
 
 inherit pkgconfig
 inherit cmake
