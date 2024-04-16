@@ -3,9 +3,8 @@ HOMEPAGE = "http://www.hilscher.com"
 LICENSE = "MIT & HilscherSLA"
 
 LIC_FILES_CHKSUM ?= "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601 \
-                     file://Toolkit/LICENSE.md;md5=b887653049e6302650eed7ce602b351e"
-
-NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/LICENSE.md"
+                     file://Toolkit/HilscherSLA.pdf;md5=1d3864f430ae2bf421d0d76e91a3dbb8"
+NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/HilscherSLA.pdf"
 
 inherit pkgconfig
 inherit cmake
@@ -13,19 +12,19 @@ inherit useradd
 
 S .= "libcifx"
 
-DEBIAN_NOAUTONAME_${PN} = "1"
+DEBIAN_NOAUTONAME:${PN} = "1"
 
 USERADD_PACKAGES = "${PN} ${PN}-plugin-spm"
-GROUPADD_PARAM_${PN} = "-r cifx"
-GROUPADD_PARAM_${PN}-plugin-spm = "-r cifx"
+GROUPADD_PARAM:${PN} = "-r cifx"
+GROUPADD_PARAM:${PN}-plugin-spm = "-r cifx"
 
 # As we may be using different settings per machine, make libcifx a machine package
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES =+ "${PN}-plugin-spm"
-RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'spm', '${PN}-plugin-spm', '', d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'spm', '${PN}-plugin-spm', '', d)}"
 
 DEPENDS        += "${@bb.utils.contains('PACKAGECONFIG', 'tun', 'libnl', '', d)}"
-RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'tun', 'libnl libnl-cli', '', d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'tun', 'libnl libnl-cli', '', d)}"
 
 SRC_URI += " \
    file://80-hilscher-netx.rules \
@@ -43,7 +42,7 @@ PACKAGECONFIG[tun] = "-DVIRTETH=ON"
 PACKAGECONFIG[irq] = ""
 PACKAGECONFIG[dma] = ""
 
-do_install_append() {
+do_install:append() {
   #bootloader
   cd "${S}/../BSL"
   install -d -m 0775 -g cifx "${D}/opt/cifx/deviceconfig/"
@@ -94,10 +93,10 @@ do_install_append() {
   chmod 0775 ${D}/opt/cifx
 }
 
-FILES_${PN} += "/usr/lib/ \
+FILES:${PN} += "/usr/lib/ \
                 /opt/cifx/ \
                 ${nonarch_base_libdir}/udev/rules.d/80-hilscher-netx.rules \
                 ${nonarch_base_libdir}/udev/rules.d/80-hilscher-cifxeth.rules \
                 "
-FILES_${PN}-plugin-spm += "/opt/cifx/plugins/ \
+FILES:${PN}-plugin-spm += "/opt/cifx/plugins/ \
                            ${nonarch_base_libdir}/udev/rules.d/80-hilscher-netx-spi.rules"

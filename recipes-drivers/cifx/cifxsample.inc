@@ -9,16 +9,16 @@ inherit pkgconfig cmake useradd
 S .= "./examples"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "-r cifx"
+GROUPADD_PARAM:${PN} = "-r cifx"
 
 EXTRA_OECMAKE = "-DCMAKE_INSTALL_PREFIX=/opt/cifx/demo/"
 
 DEPENDS="libcifx libpciaccess libnl"
 
-do_install_append() {
+do_install:append() {
   chgrp -R cifx ${D}/opt/cifx
   chmod 0775 ${D}/opt/cifx
 }
 
 PACKAGES =+ "cifxtcpserver"
-FILES_${PN} += "/opt/cifx/demo"
+FILES:${PN} += "/opt/cifx/demo"
