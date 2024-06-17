@@ -4,6 +4,7 @@ The layer meta-hilscher-drivers provides recipes and resources to driver's of pr
 
 Currently provided drivers:
  - cifX
+ - netANALYZER
 
 ### cifX
 
