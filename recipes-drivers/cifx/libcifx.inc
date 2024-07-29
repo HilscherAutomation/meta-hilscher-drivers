@@ -58,8 +58,8 @@ do_install:append() {
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
     install -m 0644 ${WORKDIR}/80-hilscher-cifxeth.rules ${D}${nonarch_base_libdir}/udev/rules.d/
 
-    install -d "${D}/etc/init.d/"
-    install -m 0744 ${WORKDIR}/cifxeth ${D}/etc/init.d/
+    install -d ${D}${sbindir}
+    install -m 0744 ${WORKDIR}/cifxeth ${D}${sbindir}/
   fi
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'spm', 'yes', 'no', d)}" = "yes" ]; then
