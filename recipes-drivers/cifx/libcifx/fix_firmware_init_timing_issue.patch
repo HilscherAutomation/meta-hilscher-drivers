@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [firmware workaround]
+
 --- a/netx_tap/netx_tap.c	2024-02-01 11:55:35.098216520 +0100
 +++ b/netx_tap/netx_tap.c	2024-02-01 11:56:52.663802467 +0100
 @@ -112,6 +112,10 @@

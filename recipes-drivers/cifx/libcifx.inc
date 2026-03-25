@@ -11,7 +11,9 @@ inherit pkgconfig
 inherit cmake
 inherit useradd
 
-S .= "libcifx"
+S .= "/libcifx"
+
+EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
 DEBIAN_NOAUTONAME:${PN} = "1"
 
@@ -51,20 +53,20 @@ do_install:append() {
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'pci', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-netx.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-netx.rules ${D}${nonarch_base_libdir}/udev/rules.d/
   fi
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'tun', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-cifxeth.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-cifxeth.rules ${D}${nonarch_base_libdir}/udev/rules.d/
 
     install -d ${D}${sbindir}
-    install -m 0744 ${WORKDIR}/cifxeth ${D}${sbindir}/
+    install -m 0744 ${UNPACKDIR}/cifxeth ${D}${sbindir}/
   fi
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'spm', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-netx-spi.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-netx-spi.rules ${D}${nonarch_base_libdir}/udev/rules.d/
 
     install -d ${D}/opt/cifx/plugins/netx-spm/
     # Delete delete spi configuration from driver as we bring our own

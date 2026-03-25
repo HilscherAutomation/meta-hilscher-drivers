@@ -4,5 +4,3 @@ SRC_URI = "git://github.com/HilscherAutomation/nadrvlinux.git;branch=main;protoc
 SRCREV = "${AUTOREV}"
 
 PV = "dev+git${SRCPV}"
-
-S = "${WORKDIR}/git"
