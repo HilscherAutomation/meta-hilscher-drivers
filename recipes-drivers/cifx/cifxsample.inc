@@ -2,7 +2,7 @@ DESCRIPTION = "Example applications for Hilscher cifX devices."
 HOMEPAGE = "http://www.hilscher.com"
 LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://../LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601"
+LIC_FILES_CHKSUM = "file://../LICENSE-MIT;md5=eae965cb67f143ba6a9eb017ac821601"
 
 inherit pkgconfig cmake useradd
 
