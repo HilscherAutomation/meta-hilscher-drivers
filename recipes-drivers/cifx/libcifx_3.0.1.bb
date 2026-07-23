@@ -1,6 +1,8 @@
 
 require driver_version.inc
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601 \
-                    file://Toolkit/HilscherSLA.pdf;md5=1d3864f430ae2bf421d0d76e91a3dbb8"
-NO_GENERIC_LICENSE[HilscherSLA] = "Toolkit/HilscherSLA.pdf"
+
+LIC_FILES_CHKSUM = "file://Toolkit/LICENSE.md;md5=b887653049e6302650eed7ce602b351e"
+
+SRC_URI += " file://0001-If-possible-allow-use-of-git-describe-version-scheme.patch;patchdir=../ "
+
 require libcifx.inc

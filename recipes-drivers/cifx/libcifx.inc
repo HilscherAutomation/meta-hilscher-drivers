@@ -2,18 +2,15 @@ DESCRIPTION = "User space driver for Hilscher cifX devices."
 HOMEPAGE = "http://www.hilscher.com"
 LICENSE = "MIT & HilscherSLA"
 
-LIC_FILES_CHKSUM ?= "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601 \
-                     file://Toolkit/LICENSE.md;md5=b887653049e6302650eed7ce602b351e"
+LIC_FILES_CHKSUM += "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601"
 
-NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/LICENSE.md"
+NO_GENERIC_LICENSE[HilscherSLA] = "Toolkit/LICENSE.md"
 
 inherit pkgconfig
 inherit cmake
 inherit useradd
 
 S .= "/libcifx"
-
-EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
 DEBIAN_NOAUTONAME:${PN} = "1"
 
