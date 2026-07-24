@@ -2,16 +2,15 @@ DESCRIPTION = "User space driver for Hilscher cifX devices."
 HOMEPAGE = "http://www.hilscher.com"
 LICENSE = "MIT & HilscherSLA"
 
-LIC_FILES_CHKSUM ?= "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601 \
-                     file://Toolkit/LICENSE.md;md5=b887653049e6302650eed7ce602b351e"
+LIC_FILES_CHKSUM += "file://LICENSE.md;md5=eae965cb67f143ba6a9eb017ac821601"
 
-NO_GENERIC_LICENSE[HilscherSLA] ?= "Toolkit/LICENSE.md"
+NO_GENERIC_LICENSE[HilscherSLA] = "Toolkit/LICENSE.md"
 
 inherit pkgconfig
 inherit cmake
 inherit useradd
 
-S .= "libcifx"
+S .= "/libcifx"
 
 DEBIAN_NOAUTONAME:${PN} = "1"
 
@@ -51,20 +50,20 @@ do_install:append() {
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'pci', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-netx.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-netx.rules ${D}${nonarch_base_libdir}/udev/rules.d/
   fi
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'tun', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-cifxeth.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-cifxeth.rules ${D}${nonarch_base_libdir}/udev/rules.d/
 
     install -d ${D}${sbindir}
-    install -m 0744 ${WORKDIR}/cifxeth ${D}${sbindir}/
+    install -m 0744 ${UNPACKDIR}/cifxeth ${D}${sbindir}/
   fi
 
   if [ "${@bb.utils.contains('PACKAGECONFIG', 'spm', 'yes', 'no', d)}" = "yes" ]; then
     install -d ${D}${nonarch_base_libdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/80-hilscher-netx-spi.rules ${D}${nonarch_base_libdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/80-hilscher-netx-spi.rules ${D}${nonarch_base_libdir}/udev/rules.d/
 
     install -d ${D}/opt/cifx/plugins/netx-spm/
     # Delete delete spi configuration from driver as we bring our own

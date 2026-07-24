@@ -1,12 +1,12 @@
-SUMMARY="netANALYZER sample application"
-HOMEPAGE="http://www.hilscher.com"
-LICENSE="MIT"
+SUMMARY = "netANALYZER sample application"
+HOMEPAGE = "http://www.hilscher.com"
+LICENSE = "MIT"
 
 LIC_FILES_CHKSUM ?= "file://../LICENSE-MIT;md5=87524f2b56aa5423a16a6351a2bd2be3"
 
 S .= "/example"
 
-DEPENDS="libnetana"
+DEPENDS = "libnetana"
 
 do_configure() {
     :

@@ -1,0 +1,30 @@
+From a206b92678a16f7b0e2208e4543a6f3b7838f8d4 Mon Sep 17 00:00:00 2001
+From: Sebastian Doell <sdoell@hilscher.com>
+Date: Thu, 23 Jul 2026 09:52:37 +0200
+Subject: [PATCH] If possible allow use of 'git describe' version scheme for
+ driver version even when build out of repo folder.
+
+Upstream-Status: Backport 3.1.0
+
+---
+ scripts/drv_version.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/drv_version.sh b/scripts/drv_version.sh
+index 2202dfe..61455e7 100755
+--- a/scripts/drv_version.sh
++++ b/scripts/drv_version.sh
+@@ -19,8 +19,8 @@ get_drv_version() {
+ 
+ 	# Prefer always git version over file. The file source is only required
+ 	# for non-versioned driver resource like an archived export.
+-	git log 1>/dev/null 2>&1 &&  {
+-		version=$(git describe --long --tags)
++	git -C ${script_path} log 1>/dev/null 2>&1 &&  {
++		version=$(git -C ${script_path} describe --long --tags)
+ 		echo $version
+ 		exit 0
+ 	}
+-- 
+2.53.0
+
