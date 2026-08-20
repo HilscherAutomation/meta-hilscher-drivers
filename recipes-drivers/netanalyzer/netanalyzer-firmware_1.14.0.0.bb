@@ -11,11 +11,11 @@ PV = "1.14.0.0"
 inherit allarch
 
 do_install() {
-  install -d ${D}/lib/firmware/netanalyzer/
-  cp -r ${S}/firmware/* ${D}/lib/firmware/netanalyzer/
-  cp -r ${S}/bsl/* ${D}/lib/firmware/netanalyzer/
+  install -d ${D}/${nonarch_base_libdir}/firmware/netanalyzer/
+  cp -r ${S}/firmware/* ${D}/${nonarch_base_libdir}/firmware/netanalyzer/
+  cp -r ${S}/bsl/* ${D}/${nonarch_base_libdir}/firmware/netanalyzer/
 }
 
 PACKAGES = "${PN}"
 RPROVIDES:${PN} = "netanalyzer-bsl"
-FILES:${PN} = "/lib"
+FILES:${PN} = "${nonarch_base_libdir}"
