@@ -42,6 +42,10 @@ PACKAGECONFIG[tun] = "-DVIRTETH=ON"
 PACKAGECONFIG[irq] = ""
 PACKAGECONFIG[dma] = ""
 
+# prevent QA error: "QA Issue: File /opt/cifx/plugins/.debug/netx-spm.so in package libcifx-dbg contains reference to TMPDIR [buildpaths]"
+# by adding missing source file mapping in case of spm as netx-spm library is built as sub-project and mapping not automatically applied
+CFLAGS:append:pn-libcifx = "${@bb.utils.contains('PACKAGECONFIG', 'spm', ' -ffile-prefix-map=${S}/../plugins/netx-spm=/usr/src/debug/${PN}/${PV}/plugins/netx-spm ', '', d)}"
+
 do_install:append() {
   #bootloader
   cd "${S}/../BSL"
